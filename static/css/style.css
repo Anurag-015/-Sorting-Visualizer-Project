@@ -1,0 +1,482 @@
+/* Root variables for theming */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --background-color: #ffffff;
+    --text-color: #212529;
+    --border-color: #dee2e6;
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+    --background-color: #1a1a1a;
+    --text-color: #ffffff;
+    --border-color: #404040;
+    --light-color: #2d2d2d;
+    --dark-color: #121212;
+}
+
+/* Base styles */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navigation styles */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.main-content {
+    margin-top: 80px;
+    min-height: calc(100vh - 200px);
+    padding: 20px 0;
+}
+
+/* Hero section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.hero-section .display-4 {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Card styles */
+.card {
+    border: none;
+    border-radius: 10px;
+    background-color: var(--light-color);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px 10px 0 0 !important;
+    border: none;
+}
+
+/* Canvas styles */
+#visualizationCanvas {
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background-color: white;
+    min-height: 400px;
+}
+
+/* Algorithm checkboxes */
+.algorithm-checkboxes .form-check {
+    margin-bottom: 0.5rem;
+}
+
+.algorithm-checkboxes .form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Statistics display */
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--light-color);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.stat-item {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-top: 0.25rem;
+}
+
+/* Race track styles */
+#raceTrack {
+    min-height: 500px;
+}
+
+.race-lane {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background-color: white;
+    position: relative;
+}
+
+.race-lane-header {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.race-algorithm-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.race-stats {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.race-canvas {
+    width: 100%;
+    height: 60px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.race-progress {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--success-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0 6px 0 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.race-winner {
+    border-color: var(--success-color) !important;
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.race-winner .race-algorithm-name {
+    color: var(--success-color);
+}
+
+/* Step description */
+#stepDescription {
+    background-color: var(--light-color);
+    border-left: 4px solid var(--primary-color);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Algorithm info panel */
+#algorithmInfo .card-body {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.complexity-table {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.complexity-table th,
+.complexity-table td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.complexity-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.complexity-best { color: var(--success-color); font-weight: bold; }
+.complexity-average { color: var(--warning-color); font-weight: bold; }
+.complexity-worst { color: var(--danger-color); font-weight: bold; }
+
+/* Code syntax highlighting */
+.code-block {
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+}
+
+.code-tabs {
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.code-tab {
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.code-tab.active {
+    border-bottom-color: var(--primary-color);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.code-tab:hover {
+    background-color: var(--light-color);
+}
+
+/* Visualization themes */
+.theme-selector {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.theme-option {
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.theme-option.active {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.theme-option:hover {
+    border-color: var(--primary-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .main-content {
+        margin-top: 70px;
+        padding: 10px 0;
+    }
+    
+    .hero-section {
+        padding: 2rem 0 !important;
+    }
+    
+    .hero-section .display-4 {
+        font-size: 2rem;
+    }
+    
+    .btn-group {
+        flex-wrap: wrap;
+    }
+    
+    .stats-container {
+        flex-direction: column;
+    }
+    
+    .stat-item {
+        margin-bottom: 1rem;
+    }
+    
+    #visualizationCanvas {
+        min-height: 250px;
+    }
+    
+    .race-lane {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Dark theme specific styles */
+[data-theme="dark"] .card {
+    background-color: var(--light-color);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: var(--light-color) !important;
+    color: var(--text-color);
+}
+
+[data-theme="dark"] #visualizationCanvas {
+    background-color: var(--dark-color);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .race-lane {
+    background-color: var(--light-color);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .code-block {
+    background-color: var(--dark-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+/* Animation classes for sorting visualization */
+.sorting-animation {
+    animation: sortingPulse 0.3s ease-in-out;
+}
+
+@keyframes sortingPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.comparison-highlight {
+    animation: comparisonBlink 0.5s ease-in-out;
+}
+
+@keyframes comparisonBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.swap-animation {
+    animation: swapShake 0.4s ease-in-out;
+}
+
+@keyframes swapShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Success animations */
+.completion-celebration {
+    animation: celebrate 1s ease-in-out;
+}
+
+@keyframes celebrate {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.05) rotate(1deg); }
+    50% { transform: scale(1.1) rotate(-1deg); }
+    75% { transform: scale(1.05) rotate(1deg); }
+}
+
+/* Loading spinner */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Tooltip styles */
+.custom-tooltip {
+    position: absolute;
+    background-color: var(--dark-color);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.custom-tooltip.show {
+    opacity: 1;
+}
+
+/* Progress indicators */
+.progress-custom {
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--light-color);
+    overflow: hidden;
+}
+
+.progress-bar-custom {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+    transition: width 0.3s ease;
+}
+
+/* Footer styles */
+footer {
+    margin-top: auto;
+}
+
+/* Accessibility improvements */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus styles for keyboard navigation */
+.btn:focus,
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+    }
+    
+    .card {
+        border: 2px solid var(--border-color);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
