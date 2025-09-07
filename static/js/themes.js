@@ -468,6 +468,47 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeThemeSystem();
 });
 
+/**
+ * Toggle dark/light mode
+ */
+function toggleDarkMode() {
+    const body = document.body;
+    const themeIcon = document.getElementById('themeIcon');
+    
+    if (body.classList.contains('dark-mode')) {
+        body.classList.remove('dark-mode');
+        if (themeIcon) {
+            themeIcon.className = 'fas fa-moon';
+        }
+        localStorage.setItem('sorting-visualizer-dark-mode', 'false');
+    } else {
+        body.classList.add('dark-mode');
+        if (themeIcon) {
+            themeIcon.className = 'fas fa-sun';
+        }
+        localStorage.setItem('sorting-visualizer-dark-mode', 'true');
+    }
+    
+    // Redraw visualization with new colors
+    if (typeof drawVisualization === 'function') {
+        drawVisualization();
+    }
+}
+
+/**
+ * Load saved dark mode preference
+ */
+function loadSavedDarkMode() {
+    const savedDarkMode = localStorage.getItem('sorting-visualizer-dark-mode');
+    if (savedDarkMode === 'true') {
+        document.body.classList.add('dark-mode');
+        const themeIcon = document.getElementById('themeIcon');
+        if (themeIcon) {
+            themeIcon.className = 'fas fa-sun';
+        }
+    }
+}
+
 // Make functions globally available
 window.setVisualizationTheme = setVisualizationTheme;
 window.setColorScheme = setColorScheme;
@@ -475,6 +516,8 @@ window.applyRandomColorScheme = applyRandomColorScheme;
 window.exportThemeConfig = exportThemeConfig;
 window.importThemeConfig = importThemeConfig;
 window.createGradientBackground = createGradientBackground;
+window.toggleDarkMode = toggleDarkMode;
+window.loadSavedDarkMode = loadSavedDarkMode;
 window.themeConfig = themeConfig;
 
 // Export for module usage
