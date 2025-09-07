@@ -98,7 +98,7 @@ function displayAlgorithmInfo(data) {
             </div>
             
             <div class="text-center">
-                <button class="btn btn-outline-primary btn-sm" onclick="showAlgorithmModal('${data.name.toLowerCase().replace(' ', '')}')">
+                <button class="btn btn-outline-primary btn-sm" onclick="showCurrentAlgorithmModal()">
                     <i class="fas fa-info-circle me-1"></i>
                     View Details
                 </button>
@@ -126,6 +126,15 @@ function displayAlgorithmError(message) {
 }
 
 /**
+ * Show modal for currently selected algorithm
+ */
+async function showCurrentAlgorithmModal() {
+    const algorithmSelect = document.getElementById('algorithmSelect');
+    const algorithm = algorithmSelect ? algorithmSelect.value : 'bubble';
+    await showAlgorithmModal(algorithm);
+}
+
+/**
  * Show detailed algorithm modal
  * @param {string} algorithm - Algorithm name
  */
@@ -134,11 +143,18 @@ async function showAlgorithmModal(algorithm) {
     const modalTitle = document.getElementById('algorithmModalTitle');
     const modalContent = document.getElementById('algorithmModalContent');
     
-    if (!modal || !modalTitle || !modalContent) return;
+    if (!modal || !modalTitle || !modalContent) {
+        console.error('Modal elements not found');
+        return;
+    }
     
     try {
         // Get algorithm data
-        const data = algorithmCache[algorithm] || await loadAlgorithmData(algorithm);
+        let data = algorithmCache[algorithm];
+        if (!data) {
+            data = await loadAlgorithmData(algorithm);
+            algorithmCache[algorithm] = data;
+        }
         
         modalTitle.textContent = data.name;
         modalContent.innerHTML = generateModalContent(data);
@@ -514,6 +530,7 @@ function generateQuizQuestions(algorithm) {
 // Make functions globally available
 window.loadAlgorithmInfo = loadAlgorithmInfo;
 window.showAlgorithmModal = showAlgorithmModal;
+window.showCurrentAlgorithmModal = showCurrentAlgorithmModal;
 window.downloadCode = downloadCode;
 window.copyCode = copyCode;
 window.getAlgorithmRecommendation = getAlgorithmRecommendation;

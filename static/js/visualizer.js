@@ -110,6 +110,51 @@ function setVisualizationArray(array) {
     
     // Update array display in UI
     updateArrayDisplay();
+    
+    // Show array statistics
+    displayArrayStatistics(array);
+}
+
+/**
+ * Display array statistics
+ * @param {Array} array - Array to analyze
+ */
+function displayArrayStatistics(array) {
+    if (array.length === 0) return;
+    
+    const stats = {
+        size: array.length,
+        min: Math.min(...array),
+        max: Math.max(...array),
+        avg: (array.reduce((sum, val) => sum + val, 0) / array.length).toFixed(1),
+        sorted: isSorted(array),
+        duplicates: array.length - new Set(array).size
+    };
+    
+    // Update any existing stats display
+    const statsContainer = document.querySelector('.array-statistics');
+    if (statsContainer) {
+        statsContainer.innerHTML = `
+            <div class="row text-center">
+                <div class="col"><small>Size: <strong>${stats.size}</strong></small></div>
+                <div class="col"><small>Range: <strong>${stats.min}-${stats.max}</strong></small></div>
+                <div class="col"><small>Avg: <strong>${stats.avg}</strong></small></div>
+                <div class="col"><small>Status: <strong class="${stats.sorted ? 'text-success' : 'text-warning'}">${stats.sorted ? 'Sorted' : 'Unsorted'}</strong></small></div>
+            </div>
+        `;
+    }
+}
+
+/**
+ * Check if array is sorted
+ * @param {Array} array - Array to check
+ * @returns {boolean} True if sorted
+ */
+function isSorted(array) {
+    for (let i = 1; i < array.length; i++) {
+        if (array[i] < array[i - 1]) return false;
+    }
+    return true;
 }
 
 /**
@@ -584,9 +629,50 @@ function celebrateCompletion() {
  * Update array display in UI
  */
 function updateArrayDisplay() {
-    // This could show the current array state in a text format
-    // For now, we'll just ensure the visualization is up to date
+    // Show current array state in text format
+    displayCurrentArray();
     drawVisualization();
+}
+
+/**
+ * Display current array in text format
+ */
+function displayCurrentArray() {
+    const canvas = document.getElementById('visualizationCanvas');
+    if (!canvas) return;
+    
+    const container = canvas.parentElement;
+    let arrayDisplay = container.querySelector('.array-display');
+    
+    if (!arrayDisplay) {
+        arrayDisplay = document.createElement('div');
+        arrayDisplay.className = 'array-display mt-3 p-3 bg-light rounded';
+        container.appendChild(arrayDisplay);
+    }
+    
+    const array = visualizerState.currentArray;
+    if (array.length === 0) {
+        arrayDisplay.innerHTML = '<p class="text-muted mb-0">No array loaded</p>';
+        return;
+    }
+    
+    arrayDisplay.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0 text-muted">Current Array (${array.length} elements):</h6>
+            <small class="text-muted">Min: ${Math.min(...array)} | Max: ${Math.max(...array)}</small>
+        </div>
+        <div class="array-values">
+            ${array.map((val, idx) => {
+                let className = 'array-element badge me-1 mb-1';
+                // Color code based on value range
+                if (val <= 33) className += ' bg-info';
+                else if (val <= 66) className += ' bg-warning text-dark';
+                else className += ' bg-success';
+                
+                return `<span class="${className}" data-index="${idx}" title="Index ${idx}: ${val}">${val}</span>`;
+            }).join('')}
+        </div>
+    `;
 }
 
 /**
