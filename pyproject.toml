@@ -1,8 +1,11 @@
 [project]
-name = "repl-nix-workspace"
+name = "Sorting-Visualizer-DSA-Project"
 version = "0.1.0"
-description = "Add your description here"
+description = "A web-based sorting visualizer built with Flask and JavaScript."
 requires-python = ">=3.11"
+authors = [
+    { name = "Anurag Gupta", email = "mr.anuraggupta2003@gmail.com" }
+]
 dependencies = [
     "email-validator>=2.3.0",
     "flask>=3.1.2",
