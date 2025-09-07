@@ -207,6 +207,41 @@ def algorithm_info(algorithm):
         }
     }
     return arr;
+}''',
+                'java': '''public static void bubbleSort(int[] arr) {
+    int n = arr.length;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap arr[j] and arr[j+1]
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}''',
+                'cpp': '''void bubbleSort(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}''',
+                'c': '''void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap arr[j] and arr[j+1]
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
 }'''
             }
         },
@@ -257,6 +292,39 @@ def algorithm_info(algorithm):
         arr[j + 1] = key;
     }
     return arr;
+}''',
+                'java': '''public static void insertionSort(int[] arr) {
+    for (int i = 1; i < arr.length; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}''',
+                'cpp': '''void insertionSort(vector<int>& arr) {
+    for (int i = 1; i < arr.size(); i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}''',
+                'c': '''void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
 }'''
             }
         },
@@ -296,6 +364,45 @@ def algorithm_info(algorithm):
         [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
     }
     return arr;
+}''',
+                'java': '''public static void selectionSort(int[] arr) {
+    for (int i = 0; i < arr.length; i++) {
+        int minIdx = i;
+        for (int j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        // Swap
+        int temp = arr[i];
+        arr[i] = arr[minIdx];
+        arr[minIdx] = temp;
+    }
+}''',
+                'cpp': '''void selectionSort(vector<int>& arr) {
+    for (int i = 0; i < arr.size(); i++) {
+        int minIdx = i;
+        for (int j = i + 1; j < arr.size(); j++) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        swap(arr[i], arr[minIdx]);
+    }
+}''',
+                'c': '''void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        int minIdx = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        // Swap
+        int temp = arr[i];
+        arr[i] = arr[minIdx];
+        arr[minIdx] = temp;
+    }
 }'''
             }
         },
@@ -374,6 +481,90 @@ function merge(left, right) {
     }
     
     return result.concat(left.slice(i), right.slice(j));
+}''',
+                'java': '''public static void mergeSort(int[] arr, int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+}
+
+public static void merge(int[] arr, int left, int mid, int right) {
+    int[] temp = new int[right - left + 1];
+    int i = left, j = mid + 1, k = 0;
+    
+    while (i <= mid && j <= right) {
+        if (arr[i] <= arr[j]) {
+            temp[k++] = arr[i++];
+        } else {
+            temp[k++] = arr[j++];
+        }
+    }
+    
+    while (i <= mid) temp[k++] = arr[i++];
+    while (j <= right) temp[k++] = arr[j++];
+    
+    for (i = left; i <= right; i++) {
+        arr[i] = temp[i - left];
+    }
+}''',
+                'cpp': '''void mergeSort(vector<int>& arr, int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+}
+
+void merge(vector<int>& arr, int left, int mid, int right) {
+    vector<int> temp(right - left + 1);
+    int i = left, j = mid + 1, k = 0;
+    
+    while (i <= mid && j <= right) {
+        if (arr[i] <= arr[j]) {
+            temp[k++] = arr[i++];
+        } else {
+            temp[k++] = arr[j++];
+        }
+    }
+    
+    while (i <= mid) temp[k++] = arr[i++];
+    while (j <= right) temp[k++] = arr[j++];
+    
+    for (i = left; i <= right; i++) {
+        arr[i] = temp[i - left];
+    }
+}''',
+                'c': '''void mergeSort(int arr[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+}
+
+void merge(int arr[], int left, int mid, int right) {
+    int temp[right - left + 1];
+    int i = left, j = mid + 1, k = 0;
+    
+    while (i <= mid && j <= right) {
+        if (arr[i] <= arr[j]) {
+            temp[k++] = arr[i++];
+        } else {
+            temp[k++] = arr[j++];
+        }
+    }
+    
+    while (i <= mid) temp[k++] = arr[i++];
+    while (j <= right) temp[k++] = arr[j++];
+    
+    for (i = left; i <= right; i++) {
+        arr[i] = temp[i - left];
+    }
 }'''
             }
         },
@@ -447,6 +638,80 @@ function partition(arr, low, high) {
     }
     
     [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+    return i + 1;
+}''',
+                'java': '''public static void quickSort(int[] arr, int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+public static int partition(int[] arr, int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    return i + 1;
+}''',
+                'cpp': '''void quickSort(vector<int>& arr, int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int partition(vector<int>& arr, int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}''',
+                'c': '''void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
     return i + 1;
 }'''
             }
@@ -528,6 +793,111 @@ function heapify(arr, n, i) {
     
     if (largest !== i) {
         [arr[i], arr[largest]] = [arr[largest], arr[i]];
+        heapify(arr, n, largest);
+    }
+}''',
+                'java': '''public static void heapSort(int[] arr) {
+    int n = arr.length;
+    
+    // Build max heap
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapify(arr, n, i);
+    }
+    
+    // Extract elements one by one
+    for (int i = n - 1; i > 0; i--) {
+        int temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+        heapify(arr, i, 0);
+    }
+}
+
+public static void heapify(int[] arr, int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    
+    if (left < n && arr[left] > arr[largest]) {
+        largest = left;
+    }
+    
+    if (right < n && arr[right] > arr[largest]) {
+        largest = right;
+    }
+    
+    if (largest != i) {
+        int temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+        heapify(arr, n, largest);
+    }
+}''',
+                'cpp': '''void heapSort(vector<int>& arr) {
+    int n = arr.size();
+    
+    // Build max heap
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapify(arr, n, i);
+    }
+    
+    // Extract elements one by one
+    for (int i = n - 1; i > 0; i--) {
+        swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+}
+
+void heapify(vector<int>& arr, int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    
+    if (left < n && arr[left] > arr[largest]) {
+        largest = left;
+    }
+    
+    if (right < n && arr[right] > arr[largest]) {
+        largest = right;
+    }
+    
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}''',
+                'c': '''void heapSort(int arr[], int n) {
+    // Build max heap
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapify(arr, n, i);
+    }
+    
+    // Extract elements one by one
+    for (int i = n - 1; i > 0; i--) {
+        int temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+        heapify(arr, i, 0);
+    }
+}
+
+void heapify(int arr[], int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    
+    if (left < n && arr[left] > arr[largest]) {
+        largest = left;
+    }
+    
+    if (right < n && arr[right] > arr[largest]) {
+        largest = right;
+    }
+    
+    if (largest != i) {
+        int temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
         heapify(arr, n, largest);
     }
 }'''
