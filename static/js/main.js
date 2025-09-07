@@ -123,32 +123,55 @@ function initializeEventListeners() {
  */
 function handleKeyboardShortcuts(e) {
     // Don't trigger shortcuts when typing in inputs
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+        return;
+    }
+    
+    // Don't trigger shortcuts when modals are open
+    if (document.querySelector('.modal.show')) {
         return;
     }
     
     switch(e.key) {
         case ' ': // Spacebar - play/pause
             e.preventDefault();
-            if (isVisualizationRunning) {
+            if (typeof isVisualizationRunning !== 'undefined' && isVisualizationRunning) {
                 pauseVisualization();
-            } else {
+            } else if (typeof startSorting !== 'undefined') {
                 startSorting();
             }
             break;
         case 'r': // R key - reset
             if (e.ctrlKey || e.metaKey) return; // Don't interfere with browser refresh
-            resetVisualization();
+            e.preventDefault();
+            if (typeof resetVisualization !== 'undefined') {
+                resetVisualization();
+            }
             break;
         case 's': // S key - step forward
-            stepForward();
+            e.preventDefault();
+            if (typeof stepForward !== 'undefined') {
+                stepForward();
+            }
             break;
         case 'g': // G key - generate new array
-            generateRandomArray();
+            e.preventDefault();
+            if (typeof generateRandomArray !== 'undefined') {
+                generateRandomArray();
+            }
             break;
         case 't': // T key - toggle theme
+            e.preventDefault();
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             setTheme(newTheme);
+            break;
+        case '1': // Switch to learn mode
+            e.preventDefault();
+            showLearnMode();
+            break;
+        case '2': // Switch to game mode
+            e.preventDefault();
+            showGameMode();
             break;
     }
 }

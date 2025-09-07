@@ -201,7 +201,18 @@ function generateModalContent(data) {
             <div class="mb-4">
                 <h5><i class="fas fa-info-circle text-primary me-2"></i>Overview</h5>
                 <p>${data.description}</p>
+                ${data.detailed_explanation ? `<p class="mt-3"><strong>How it works:</strong> ${data.detailed_explanation}</p>` : ''}
             </div>
+            
+            <!-- How it works steps -->
+            ${data.how_it_works ? `
+            <div class="mb-4">
+                <h5><i class="fas fa-cogs text-success me-2"></i>Step-by-Step Process</h5>
+                <ol class="list-group list-group-numbered">
+                    ${data.how_it_works.map(step => `<li class="list-group-item">${step}</li>`).join('')}
+                </ol>
+            </div>
+            ` : ''}
             
             <!-- Complexity Table -->
             <div class="mb-4">

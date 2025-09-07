@@ -397,9 +397,9 @@ function drawBars(ctx, array, step, margin, availableWidth, availableHeight, max
         ctx.fillRect(x, y, actualBarWidth, barHeight);
         
         // Draw value label on smaller arrays
-        if (array.length <= 20) {
-            ctx.fillStyle = '#333';
-            ctx.font = '12px Arial';
+        if (array.length <= 30) {
+            ctx.fillStyle = currentTheme === 'dark' ? '#fff' : '#333';
+            ctx.font = `${Math.max(8, Math.min(12, barWidth / 3))}px Arial`;
             ctx.textAlign = 'center';
             ctx.fillText(value, x + actualBarWidth / 2, y - 5);
         }

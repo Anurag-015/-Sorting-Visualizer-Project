@@ -165,7 +165,16 @@ def algorithm_info(algorithm):
     algorithm_data = {
         'bubble': {
             'name': 'Bubble Sort',
-            'description': 'Bubble sort repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.',
+            'description': 'Bubble sort is like bubbles rising to the surface! It compares neighboring elements and swaps them if they\'re in the wrong order. The largest elements "bubble up" to the end with each pass through the array. It\'s simple to understand but slow for large datasets.',
+            'detailed_explanation': 'Bubble sort works by repeatedly stepping through the list, comparing each pair of adjacent items and swapping them if they are in the wrong order. The pass through the list is repeated until the list is sorted. The algorithm gets its name from the way smaller or larger elements "bubble" to the top of the list.',
+            'how_it_works': [
+                'Start at the beginning of the array',
+                'Compare the first two elements',
+                'If they are in the wrong order, swap them',
+                'Move to the next pair and repeat',
+                'Continue until you reach the end',
+                'Repeat the entire process until no swaps are needed'
+            ],
             'time_complexity': {
                 'best': 'O(n)',
                 'average': 'O(n²)',
@@ -175,9 +184,10 @@ def algorithm_info(algorithm):
             'stable': True,
             'adaptive': True,
             'applications': [
-                'Educational purposes',
-                'Small datasets',
-                'Nearly sorted data'
+                'Teaching basic sorting concepts to beginners',
+                'Small datasets (under 50 elements)',
+                'Nearly sorted data where few swaps are needed',
+                'Situations where simplicity is more important than efficiency'
             ],
             'code': {
                 'python': '''def bubble_sort(arr):
@@ -202,7 +212,16 @@ def algorithm_info(algorithm):
         },
         'insertion': {
             'name': 'Insertion Sort',
-            'description': 'Insertion sort builds the final sorted array one item at a time, inserting each element into its correct position.',
+            'description': 'Insertion sort works like sorting playing cards in your hand. You pick up cards one by one and insert each card into its correct position among the cards you\'ve already sorted. It\'s efficient for small datasets and works great when data is already mostly sorted.',
+            'detailed_explanation': 'Insertion sort builds the final sorted array one item at a time. It removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there. It repeats until no input elements remain.',
+            'how_it_works': [
+                'Start with the second element (assume first is sorted)',
+                'Compare it with elements in the sorted portion',
+                'Shift larger elements to the right',
+                'Insert the current element in its correct position',
+                'Move to the next element and repeat',
+                'Continue until all elements are processed'
+            ],
             'time_complexity': {
                 'best': 'O(n)',
                 'average': 'O(n²)',
@@ -212,9 +231,10 @@ def algorithm_info(algorithm):
             'stable': True,
             'adaptive': True,
             'applications': [
-                'Small datasets',
-                'Nearly sorted data',
-                'Online algorithm (can sort data as it receives it)'
+                'Small datasets (very efficient for arrays with fewer than 50 elements)',
+                'Nearly sorted data (performs excellently when data is almost in order)',
+                'Online algorithm (can sort data as it arrives)',
+                'As a final stage of more complex algorithms like quicksort'
             ],
             'code': {
                 'python': '''def insertion_sort(arr):
@@ -281,7 +301,16 @@ def algorithm_info(algorithm):
         },
         'merge': {
             'name': 'Merge Sort',
-            'description': 'Merge sort is a divide-and-conquer algorithm that divides the array into halves, sorts them, and then merges them back together.',
+            'description': 'Merge sort uses the "divide and conquer" strategy - like organizing a messy room by dividing it into smaller sections, cleaning each section, then combining them back together. It splits the array in half repeatedly until each piece has just one element, then merges them back in sorted order.',
+            'detailed_explanation': 'Merge sort is a divide-and-conquer algorithm that works by dividing the unsorted list into n sublists, each containing one element, then repeatedly merging sublists to produce new sorted sublists until there is only one sublist remaining.',
+            'how_it_works': [
+                'Divide the array into two halves',
+                'Recursively sort both halves',
+                'Merge the two sorted halves back together',
+                'Continue dividing until each piece has one element',
+                'Merge pieces back together in sorted order',
+                'Result is a completely sorted array'
+            ],
             'time_complexity': {
                 'best': 'O(n log n)',
                 'average': 'O(n log n)',
@@ -291,9 +320,10 @@ def algorithm_info(algorithm):
             'stable': True,
             'adaptive': False,
             'applications': [
-                'Large datasets',
-                'External sorting',
-                'When stability is required'
+                'Large datasets where consistent performance is needed',
+                'External sorting (when data doesn\'t fit in memory)',
+                'When stability is required (keeping equal elements in original order)',
+                'Parallel processing (easy to implement across multiple processors)'
             ],
             'code': {
                 'python': '''def merge_sort(arr):
@@ -349,7 +379,16 @@ function merge(left, right) {
         },
         'quick': {
             'name': 'Quick Sort',
-            'description': 'Quick sort is a divide-and-conquer algorithm that picks a pivot element and partitions the array around it.',
+            'description': 'Quick sort is like organizing people by height: pick someone as a reference point (pivot), put shorter people on one side and taller people on the other, then repeat for each group. It\'s very fast on average and sorts in-place, making it popular for general-purpose sorting.',
+            'detailed_explanation': 'Quicksort is a divide-and-conquer algorithm that works by selecting a \'pivot\' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot.',
+            'how_it_works': [
+                'Choose a pivot element from the array',
+                'Partition: rearrange array so elements smaller than pivot come before it',
+                'Elements greater than pivot come after it',
+                'Recursively apply same process to sub-arrays',
+                'Continue until all sub-arrays are sorted',
+                'No merging step needed - array is sorted in place'
+            ],
             'time_complexity': {
                 'best': 'O(n log n)',
                 'average': 'O(n log n)',
@@ -359,9 +398,10 @@ function merge(left, right) {
             'stable': False,
             'adaptive': False,
             'applications': [
-                'General-purpose sorting',
-                'Large datasets',
-                'In-place sorting requirements'
+                'General-purpose sorting (most common choice)',
+                'Large datasets where average performance matters',
+                'In-place sorting when memory is limited',
+                'Built into many programming language libraries'
             ],
             'code': {
                 'python': '''def quick_sort(arr, low=0, high=None):
