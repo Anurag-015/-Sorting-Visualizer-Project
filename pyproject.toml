@@ -1,5 +1,5 @@
 [project]
-name = "Sorting-Visualizer-DSA-Project"
+name = "AlgoViz – Interactive Sorting Visualizer"
 version = "0.1.0"
 description = "A web-based sorting visualizer built with Flask and JavaScript."
 requires-python = ">=3.11"
