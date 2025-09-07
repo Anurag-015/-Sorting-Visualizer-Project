@@ -169,7 +169,7 @@ function createColorSchemeSelector() {
  */
 function setVisualizationTheme(theme) {
     if (!themeConfig.visualizationThemes[theme]) {
-        console.warn(`Unknown visualization theme: ${theme}`);
+        // Silently ignore unknown themes to avoid console warnings
         return;
     }
     
@@ -193,7 +193,7 @@ function setVisualizationTheme(theme) {
  */
 function setColorScheme(scheme) {
     if (!themeConfig.colorSchemes[scheme]) {
-        console.warn(`Unknown color scheme: ${scheme}`);
+        // Silently ignore unknown color schemes
         return;
     }
     
